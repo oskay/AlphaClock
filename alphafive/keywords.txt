@@ -1,0 +1,81 @@
+#######################################
+# Syntax Coloring Map For Alpha Five Library
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+####################################### 
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+U8DIVBY10               KEYWORD2
+U16DIVBY10              KEYWORD2
+a5getFontChar           KEYWORD2
+a5editFontChar          KEYWORD2
+a5loadAltNumbers        KEYWORD2
+a5loadVidBuf_Ascii      KEYWORD2
+a5loadVidBuf_DP         KEYWORD2
+a5loadVidBuf_fromOSB_noCache    KEYWORD2
+a5loadVidBuf_fromOSB	KEYWORD2
+a5BeginFadeToOSB        KEYWORD2
+a5LoadNextFadeStage     KEYWORD2
+a5loadOSB_Ascii         KEYWORD2
+a5loadOSB_DP            KEYWORD2
+a5loadOSB_Segment       KEYWORD2
+a5clearVidBuf           KEYWORD2
+a5clearOSB              KEYWORD2
+a5nightLight            KEYWORD2
+a5CheckForRTC           KEYWORD2
+a5GetButtons            KEYWORD2
+a5writeEEPROM           KEYWORD2
+a5tone                  KEYWORD2
+a5Init                  KEYWORD2
+a5noTone                KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+####################################### 
+
+a5_BUTTONMASK     		LITERAL1
+a5_alarmSetBtn          LITERAL1 
+a5_timeSetBtn           LITERAL1 
+a5_plusBtn              LITERAL1 
+a5_minusBtn             LITERAL1 
+a5_allButtonsButAlarmSet    LITERAL1  
+a5_allButtonsButTimeSet LITERAL1 
+a5_allButtonsButPlus    LITERAL1 
+a5_allButtonsButMinus   LITERAL1 
+a5_TimeSetPlusBtns      LITERAL1 
+a5_TimeSetMinusBtns     LITERAL1 
+a5_AlarmSetPlusBtns     LITERAL1 
+a5_AlarmSetMinusBtns    LITERAL1 
+a5_MaxBright            LITERAL1
+a5_VIDBUFLENGTH         LITERAL1
+a5_EELength             LITERAL1
+a5_monthShortNames_P    LITERAL1
+a5_asciiOffset     		LITERAL1
+a5_integerOffset    	LITERAL1
+
+ 
+#######################################
+# Built-in Variables (LITERAL2)
+#######################################
+
+a5_vidBuf                   LITERAL2
+a5_OSB                      LITERAL2
+a5_LastOSB     				LITERAL2
+a5_FadeFrom     			LITERAL2
+a5_FadeTo     				LITERAL2
+a5_EEvalues                 LITERAL2
+a5_intensityStep            LITERAL2
+a5_litChar                  LITERAL2
+a5_brightLevel              LITERAL2
+a5_brightMode               LITERAL2 
+a5_timer1_toggle_count      LITERAL2
+a5_BLUT                     LITERAL2
+a5_FontTable                LITERAL2
+
+
+  
