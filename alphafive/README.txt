@@ -1,6 +1,6 @@
  The Alpha Five library for Arduino
- Version 2.0 - 10/22/2012
- Copyright (c) 2012 Windell H. Oskay.  All right reserved.
+ Version 2.1 - 1/31/2013
+ Copyright (c) 2013 Windell H. Oskay.  All right reserved.
  
 Software for Alpha Clock Five from Evil Mad Scientist Laboratories. 
 Extended information about this software and its usage is available on our wiki: 
