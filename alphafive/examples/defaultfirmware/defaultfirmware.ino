@@ -1,12 +1,10 @@
-
-
 /*
-Alpha_20.ino 
+defaultfirmware.ino 
  
- -- Alpha Clock Five Firmware, version 2.0 --
+ -- Alpha Clock Five Firmware, version 2.1 --
  
- Version 2.0.0 - 10/27/2012
- Copyright (c) 2012 Windell H. Oskay.  All right reserved.
+ Version 2.1.0 - January 31, 2013
+ Copyright (c) 2013 Windell H. Oskay.  All right reserved.
  http://www.evilmadscientist.com/
  
  ------------------------------------------------------------
@@ -16,7 +14,7 @@ Alpha_20.ino
  
  Target: ATmega644A, clock at 16 MHz.
  
- Designed to work with Arduino 1.0.1; untested with other versions.
+ Designed to work with Arduino 1.0.3; untested with other versions.
  
  For additional requrements, please see:
  http://wiki.evilmadscience.com/Alpha_Clock_Firmware_v2
@@ -25,9 +23,9 @@ Alpha_20.ino
  Thanks to Trammell Hudson for inspiration and helpful discussion.
  https://bitbucket.org/hudson/alphaclock
  
- ------------------------------------------------------------
  
- "No dogs were involved in the writing of this code."
+ Thanks to William Phelps - wm (at) usa.net, for several important 
+ bug fixes.    https://github.com/wbphelps/AlphaClock
  
  ------------------------------------------------------------
  
@@ -212,10 +210,10 @@ void decrementAlarm(void)
   UpdateEE = 1;
 }
 
-
 void TurnOffAlarm(void)
-{ // This stops the alarm when it is going off. It does not disable the alarm.
-  if (alarmNow){
+{ // This cancels the alarm when it is going off (or snoozed).
+  // It does leave the alarm enabled for next time, however.
+  if (alarmNow || snoozed){
     snoozed = 0;
     alarmNow = 0;
     a5noTone();
@@ -223,11 +221,7 @@ void TurnOffAlarm(void)
     if (modeShowMenu == 0) 
       DisplayWordSequence(2); // Display: "ALARM OFF", EXCEPT if we are in the menus.
   }
-}
-
-
-
-
+}  
 
 void checkButtons(void )
 { 
@@ -817,10 +811,10 @@ void DisplayWordSequence (byte sequence)
     else
       wordSequence = 0;
     break; 
-  case 5: //Display "VER20" " LED " "TEST "  // Display software version number, 2.0
+  case 5: //Display "VER21" " LED " "TEST "  // Display software version number, 2.1
 
     if (wordSequenceStep == 1){
-      DisplayWord ("VER20", 2000);
+      DisplayWord ("VER21", 2000);
       DisplayWordDP("___1_");
     }
     else if (wordSequenceStep == 3)
@@ -964,12 +958,9 @@ void setup() {
 
   if ( UseRTC == 0)
   {
-    Serial.println("Setting the date to 2012. I didn't exist in 1970.");   
-    setTime(0,0,0,1, 1, 2012);
+    Serial.println("Setting the date to 2013. I didn't exist in 1970.");   
+    setTime(0,0,0,1, 1, 2013);
   }
-
-
-
 
   SerialPrintTime(); 
   NextClockUpdate = millis() + 1;
@@ -1760,12 +1751,41 @@ void UpdateDisplay (byte forceUpdate) {
 
   }
 }
+ 
 
 
 void AdjDayMonthYear (int8_t AdjDay, int8_t AdjMonth, int8_t AdjYear)
 {
-  int yrTmp = year() + (int) AdjYear; 
-  setTime(hour(),minute(),second(),day() + AdjDay,month() + AdjMonth,yrTmp);
+  // From Time library: API starts months from 1, this array starts from 0
+  const uint8_t monthDays[]={31,28,31,30,31,30,31,31,30,31,30,31}; 
+
+   time_t timeTemp = now();
+      
+  int yrTemp = year(timeTemp) + (int) AdjYear;  
+  
+  int moTemp = month(timeTemp) + AdjMonth;  // Avoid changing year, unless requested
+  if (moTemp < 1)
+      moTemp = 12;
+   if (moTemp > 12)
+      moTemp = 1;
+      
+  int dayTemp = day(timeTemp) + AdjDay;  // avoid changing month, unless requested
+  
+  if (dayTemp < 1)
+     dayTemp = monthDays[moTemp - 1]; 
+     
+  if (dayTemp > monthDays[moTemp - 1])
+    if (AdjDay > 0)
+      {  // Roll over day-of-month to 1, if explicitly requesting increase in date.  
+         dayTemp = 1;
+      }
+      else
+      { // Otherwise, we should "truncate" the date to last day of month.
+       dayTemp = monthDays[moTemp - 1];
+      }
+     
+  setTime(hour(timeTemp),minute(timeTemp),second(timeTemp),
+      dayTemp, moTemp, yrTemp);
   if (UseRTC)  
     RTC.set(now()); 
 }
@@ -2086,17 +2106,19 @@ void TimeDisplay (byte DisplayModeLocal, byte forceUpdateCopy)  {
 void SerialPrintTime(){
   //   Print time over serial interface.   Adapted from Time library.
 
-  Serial.print(hour());
-  printDigits(minute());
-  printDigits(second());
+ time_t timeTmp = now();  
+
+  Serial.print(hour(timeTmp));
+  printDigits(minute(timeTmp));
+  printDigits(second(timeTmp));
   Serial.print(" ");
-  Serial.print(dayStr(weekday()));
+  Serial.print(dayStr(weekday(timeTmp)));
   Serial.print(" ");
-  Serial.print(day());
+  Serial.print(day(timeTmp));
   Serial.print(" ");
-  Serial.print(monthShortStr(month()));
+  Serial.print(monthShortStr(month(timeTmp)));
   Serial.print(" ");
-  Serial.print(year()); 
+  Serial.print(year(timeTmp)); 
   Serial.println(); 
 
 }
