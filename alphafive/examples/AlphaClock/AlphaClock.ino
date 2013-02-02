@@ -1,5 +1,6 @@
 /*
-defaultfirmware.ino 
+
+ AlphaClock.ino 
  
  -- Alpha Clock Five Firmware, version 2.1 --
  
