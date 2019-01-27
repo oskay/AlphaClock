@@ -62,7 +62,7 @@ byte a5_brightMode;  // 0: low brightness mode. 1: Medium. 2: High brightness mo
 volatile long a5_timer1_toggle_count;
 
 // Short month names:
-char a5_monthShortNames_P[] PROGMEM = "JANFEBMARAPRMAYJUNJULAUGSEPOCTNOVDEC";
+const char a5_monthShortNames_P[] PROGMEM = "JANFEBMARAPRMAYJUNJULAUGSEPOCTNOVDEC";
 
 
 /*

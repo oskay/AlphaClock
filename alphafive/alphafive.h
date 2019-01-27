@@ -63,7 +63,7 @@ extern int8_t a5_FadeStage;
 
 extern int8_t a5_brightLevel;
 extern byte a5_brightMode;  // 0: low brightness mode. 1: Medium. 2: High brightness mode
-extern char a5_monthShortNames_P[];
+extern const char a5_monthShortNames_P[];
 
 byte a5getFontChar(char asciiChar, byte offset);
 void a5editFontChar(char asciiChar, byte A, byte B, byte C);

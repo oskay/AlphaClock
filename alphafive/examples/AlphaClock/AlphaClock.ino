@@ -62,7 +62,7 @@
 //#include "fiveletterwordspd.h" // Public domain alternative
 
 
-#include <Time.h>       // The Arduino Time library, http://www.arduino.cc/playground/Code/Time
+#include <TimeLib.h>    // The Arduino Time library, http://www.arduino.cc/playground/Code/Time
 #include <Wire.h>       // For optional RTC module
 #include <DS1307RTC.h>  // For optional RTC module. (This library included with the Arduino Time library)
 #include <EEPROM.h>     // For saving settings 
@@ -1186,7 +1186,7 @@ void SerialSendDataDaisyChain (char DataIn[])
   *toPtr++ = *fromPtr++;
   *toPtr = *fromPtr; 
 
-  Serial1.write(outputBuffer);
+  Serial.write(outputBuffer);
 }
 
 
