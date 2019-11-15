@@ -1,25 +1,17 @@
-/*
+ /*
 
  AlphaClock.ino 
  
- -- Alpha Clock Five Firmware, version 2.1 --
+ -- Alpha Clock Five Firmware, version 2.2 --
  
- Version 2.1.0 - January 31, 2013
- Copyright (c) 2013 Windell H. Oskay.  All right reserved.
+ Version 2.2.0 - November 15, 2019
+ Copyright (c) 2019 Windell H. Oskay.  All right reserved.
  http://www.evilmadscientist.com/
  
  ------------------------------------------------------------
  
  Designed for Alpha Clock Five, a five letter word clock designed by
  Evil Mad Scientist Laboratories http://www.evilmadscientist.com
- 
- Target: ATmega644A, clock at 16 MHz.
- 
- Designed to work with Arduino 1.0.3; untested with other versions.
- 
- For additional requrements, please see:
- http://wiki.evilmadscience.com/Alpha_Clock_Firmware_v2
- 
  
  Thanks to Trammell Hudson for inspiration and helpful discussion.
  https://bitbucket.org/hudson/alphaclock
@@ -29,6 +21,48 @@
  bug fixes.    https://github.com/wbphelps/AlphaClock
  
  ------------------------------------------------------------
+
+Target: ATmega644[potentially with suffixes], clock at 16 MHz.
+
+Environment
+
+Designed to work with Arduino 1.8; untested with other versions.
+ 
+Install the MightyCore additions for Arduino:
+https://github.com/MCUdude/MightyCore#how-to-install
+
+Tools > Board> MightyCore: ATmega644
+Clock: External 16 MHz
+BOD: 2.7V
+Variant: 644 (select the actual chip on your board)
+Pinout: Sanguino pinout
+
+Download and install the Time library:
+https://github.com/PaulStoffregen/Time
+
+Download and install the DS1307 library:
+https://github.com/PaulStoffregen/DS1307RTC
+
+(The above two can be added to your regular Arduino libraries folder.)
+
+
+For additional requirements, please see:
+ http://wiki.evilmadscience.com/Alpha_Clock_Firmware_v2
+
+ Note in particular that the Alpha Clock Five bootloader uses
+ a typical upload speed of 57200 baud.
+ 
+
+ ------------------------------------------------------------
+
+
+
+
+
+
+
+
+
  
  
  This program is free software: you can redistribute it and/or modify
@@ -62,9 +96,9 @@
 //#include "fiveletterwordspd.h" // Public domain alternative
 
 
-#include <Time.h>       // The Arduino Time library, http://www.arduino.cc/playground/Code/Time
+#include <Time.h>       // The Arduino Time library, https://github.com/PaulStoffregen/Time
 #include <Wire.h>       // For optional RTC module
-#include <DS1307RTC.h>  // For optional RTC module. (This library included with the Arduino Time library)
+#include <DS1307RTC.h>  // For optional RTC module. https://github.com/PaulStoffregen/DS1307RTC
 #include <EEPROM.h>     // For saving settings 
 
 // "Factory" default configuration can be configured here:
@@ -2289,6 +2323,3 @@ void EESaveSettings (void){
       RTC.set(now());  // Update time at RTC, in case time was changed in settings menu
   }
 } 
-
-
-

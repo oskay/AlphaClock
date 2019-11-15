@@ -2,8 +2,10 @@
  alphafive.cpp
  
  Part of the Alpha Five library for Arduino
- Version 2.1 - 1/31/2013
- Copyright (c) 2013 Windell H. Oskay.  All right reserved.
+ 
+Version 2.2.0 - November 15, 2019
+ Copyright (c) 2019 Windell H. Oskay.  All right reserved.
+ http://www.evilmadscientist.com/
  
  This library is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -62,7 +64,7 @@ byte a5_brightMode;  // 0: low brightness mode. 1: Medium. 2: High brightness mo
 volatile long a5_timer1_toggle_count;
 
 // Short month names:
-char a5_monthShortNames_P[] PROGMEM = "JANFEBMARAPRMAYJUNJULAUGSEPOCTNOVDEC";
+const char a5_monthShortNames_P[] PROGMEM = "JANFEBMARAPRMAYJUNJULAUGSEPOCTNOVDEC";
 
 
 /*
