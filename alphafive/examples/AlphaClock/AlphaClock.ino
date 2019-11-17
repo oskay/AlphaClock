@@ -905,6 +905,46 @@ void DisplayWordSequence (byte sequence)
     else
       wordSequence = 0;
     break;    
+  case 10:    //Say "HELLO" "GRACE" "ANNA"
+    if (wordSequenceStep == 1)
+      DisplayWord ("HELLO", 1000);
+    else if (wordSequenceStep == 3)
+      DisplayWord ("GRACE", 800);
+    else if (wordSequenceStep == 5)
+      DisplayWord (" ANNA", 800);
+    else if (wordSequenceStep < 7)
+      DisplayWord ("     ", 300);
+    else
+      wordSequence = 0;
+    break;
+  case 11:    //Say "HAPPY" "NEW" "YEAR"
+    if (wordSequenceStep < 3)
+      DisplayWord ("HAPPY", 800);
+    else if (wordSequenceStep < 5)
+      DisplayWord (" NEW ", 800);
+    else if (wordSequenceStep < 7)
+      DisplayWord (" YEAR", 800);
+    else
+      wordSequence = 0;
+    break;
+  case 12:    //Say "HAPPY" "B-DAY"
+    if (wordSequenceStep < 3)
+      DisplayWord ("HAPPY", 800);
+    else if (wordSequenceStep < 5)
+      DisplayWord ("B-DAY", 800);
+    else
+      wordSequence = 0;
+    break;
+  case 13:    //Say "HAPPY" "ANNI-" "VRSRY"
+    if (wordSequenceStep < 3)
+      DisplayWord ("HAPPY", 800);
+    else if (wordSequenceStep < 5)
+      DisplayWord ("ANNI-", 800);
+    else if (wordSequenceStep < 7)
+      DisplayWord ("VRSRY", 800);
+    else
+      wordSequence = 0;
+    break;
 
 
 
@@ -943,6 +983,21 @@ void DisplayWordDP (char WordIn[])
   dpCache[2] = WordIn[2];
   dpCache[3] = WordIn[3];
   dpCache[4] = WordIn[4];
+}
+
+
+
+
+void SpecialOccasionMessage()
+{
+  if (second() % 20 == 0) {
+    if (month() == 1 && day() == 1)
+      DisplayWordSequence(11);  // Happy new year!
+    else if (month() == 9 && day() == 5)
+      DisplayWordSequence(12);  // Happy birthday!
+    else if (month() == 7 && day() == 18)
+      DisplayWordSequence(13);  // Happy anniversary!
+  }
 }
 
 
@@ -1783,6 +1838,8 @@ void UpdateDisplay (byte forceUpdate) {
     }
     else 
       TimeDisplay(DisplayMode, forceUpdate);
+      
+    SpecialOccasionMessage();
 
   }
 }
