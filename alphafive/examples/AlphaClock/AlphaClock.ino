@@ -846,10 +846,10 @@ void DisplayWordSequence (byte sequence)
     else
       wordSequence = 0;
     break; 
-  case 5: //Display "VER21" " LED " "TEST "  // Display software version number, 2.1
+  case 5: //Display "VER22" " LED " "TEST "  // Display software version number, 2.2
 
     if (wordSequenceStep == 1){
-      DisplayWord ("VER21", 2000);
+      DisplayWord ("VER22", 2000);
       DisplayWordDP("___1_");
     }
     else if (wordSequenceStep == 3)
